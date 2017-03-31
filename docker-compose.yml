@@ -1,0 +1,22 @@
+---
+fogdb:
+  image: docker.io/mysql:5.7      
+  ports:
+     - 3306:3306
+  environment:
+     - MYSQL_ROOT_PASSWORD=1234
+     - MYSQL_USER=fogpanel
+     - MYSQL_PASSWORD=password
+     - MYSQL_DATABASE=fogpanel
+app:
+  image: sanjeev
+  ports:
+   - 8080:8080
+  environment:
+   - DB_HOST=fogdb
+   - DB_PORT=3306
+   - DB_NAME=fogpanel
+   - DB_USERNAME=fogpanel
+   - DB_PASSWORD=password
+  links:
+   - fogdb:fogdb
